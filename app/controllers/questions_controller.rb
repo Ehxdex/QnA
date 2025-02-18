@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[ show ]
   def index
     @questions = Question.all
   end
@@ -7,13 +8,15 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def show; end
+
   def create
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to @question
+      redirect_to @question, notice: "Your question successfully created."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -21,5 +24,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
   end
 end
