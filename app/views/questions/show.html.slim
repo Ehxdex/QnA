@@ -1,5 +1,11 @@
 h1 = @question.title
 p = @question.body
 
+-if @question.answers.present?
+  - @question.answers.each do |a|
+    p = a.body
+
+hr
+
 h2 Create New Answer
 = render 'answers/form'
