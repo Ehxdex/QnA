@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show ]
+  before_action :set_answer, only: %i[ show ]
   def index
     @questions = Question.all
   end
@@ -28,5 +29,9 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
+  end
+
+  def set_answer
+    @answer = @question.answers.new
   end
 end

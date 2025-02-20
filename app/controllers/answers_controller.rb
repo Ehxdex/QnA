@@ -1,16 +1,13 @@
 class AnswersController < ApplicationController
-  before_action :find_question, only: %i[new create]
-  def new
-    @answer = @question.answers.new
-  end
+  before_action :find_question, only: %i[ new create ]
 
   def create
     @answer = @question.answers.new(answer_params)
 
     if @answer.save
-      redirect_to @answer
+      redirect_to @answer, notice: "Answer successfully created"
     else
-      render :new
+      render "questions/show", status: :unprocessable_entity
     end
   end
 
