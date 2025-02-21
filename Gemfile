@@ -31,6 +31,10 @@ gem "solid_cable"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 gem "slim-rails"
+
+# Devise is a flexible authentication solution for Rails based on Warden.
+gem "devise"
+
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
 gem "kamal", require: false
 
@@ -64,4 +68,5 @@ group :test do
   gem "selenium-webdriver"
   gem "shoulda-matchers", "~> 6.0"
   gem "rails-controller-testing"
+  gem "launchy"
 end
