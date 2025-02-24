@@ -2,7 +2,7 @@
 
 h1 Questions
 - unless @questions.empty?
-  - @questions.each do |q|
-    p = q.title
+  - @questions.each do |question|
+    p = link_to question.title, question_path(question)
 
 = link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete }

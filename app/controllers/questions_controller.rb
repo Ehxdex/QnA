@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [ :index, :show ]
   before_action :set_question, only: %i[ show ]
   before_action :set_answer, only: %i[ show ]
   def index

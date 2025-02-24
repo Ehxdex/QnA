@@ -1,5 +1,10 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_question, only: %i[ new create ]
+
+  def new
+    @question = Question.new
+  end
 
   def create
     @answer = @question.answers.new(answer_params)

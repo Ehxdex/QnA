@@ -1,9 +1,10 @@
 h1 = @question.title
 p = @question.body
 
+h3 = 'Answers:'
 -if @question.answers.present?
-  - @question.answers.each do |a|
-    p = a.body
+  - @question.answers.each do |answer|
+    p = answer.body
 
 hr
 
