@@ -6,7 +6,7 @@ feature 'User can create question', %q(
   I'd like to be able to ask the question
 ) do
   given(:user) { create(:user) }
-  given(:question) { create(:question) }
+  given(:question) { create(:question, author: user) }
 
   scenario 'Authenticated user asks a question' do
     visit new_user_session_path

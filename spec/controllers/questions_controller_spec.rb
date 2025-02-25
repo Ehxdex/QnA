@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 3) }
+    let(:user) { create(:user) }
+    let(:questions) { create_list(:question, 3, author: user) }
     before { get :index }
 
     it 'fills the array with questions' do

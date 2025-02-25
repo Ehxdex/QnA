@@ -5,8 +5,8 @@ feature 'Authenticated user can create answers', %q(
   the user must authenticate
 ) do
   given(:user) { create(:user) }
-  given(:question) { create(:question) }
-  given(:answer) { create(:answer, question: question) }
+  given(:question) { create(:question, author: user) }
+  given(:answer) { create(:answer, question: question, author: user) }
 
   scenario 'Authenticated user create answer' do
     visit new_user_session_path

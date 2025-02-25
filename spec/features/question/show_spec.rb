@@ -4,7 +4,8 @@ feature 'user can show question', %q(
   passes to the show page
   show current question
 ) do
-  given(:question) { create(:question) }
+  given(:user) { create(:user) }
+  given(:question) { create(:question, author: user) }
 
   scenario 'show current question' do
     visit question_path(question)

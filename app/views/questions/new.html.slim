@@ -2,14 +2,6 @@
 
 h1 = 'New Question'
 
-= form_with model: @question, local: true do |f|
-  div.field
-    = f.label :title
-    br
-    = f.text_field :title
-  div.field
-    = f.label :body
-    br
-    = f.text_area :body
-  div.actions
-    = f.submit 'Ask'
+= render 'form'
+
+= link_to 'Back', questions_path
