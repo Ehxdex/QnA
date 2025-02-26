@@ -1,24 +1,26 @@
 class AnswersController < ApplicationController
-  before_action :find_question, only: %i[new create]
-  def new
-    @answer = @question.answers.new
-  end
+  before_action :authenticate_user!
 
   def create
+    @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
+    @answer.author = current_user
 
     if @answer.save
-      redirect_to @answer
+      redirect_to @answer, notice: "Answer successfully created"
     else
-      render :new
+      redirect_to @question, notice: "Body can't be blank"
     end
   end
 
-  private
+  def destroy
+    @answer = Answer.find(params[:id])
+    @answer.destroy
 
-  def find_question
-    @question = Question.find(params[:question_id])
+    redirect_to question_path(@answer.question), notice: "The answer has been deleted."
   end
+
+  private
 
   def answer_params
     params.require(:answer).permit(:body)
