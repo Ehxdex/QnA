@@ -70,3 +70,5 @@ group :test do
   gem "rails-controller-testing"
   gem "launchy"
 end
+
+gem "cssbundling-rails", "~> 1.4"
