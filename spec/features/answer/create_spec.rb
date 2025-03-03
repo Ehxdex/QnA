@@ -9,11 +9,7 @@ feature 'Authenticated user can create answers', %q(
   given(:answer) { create(:answer, question: question, author: user) }
 
   scenario 'Authenticated user create answer' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
-
+    sign_in(user)
     visit question_path(question)
 
     fill_in 'Your Answer', with: answer.body
@@ -35,11 +31,7 @@ feature 'Authenticated user can create answers', %q(
   end
 
   scenario 'Authenticated user create answer with error' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
-
+    sign_in(user)
     visit question_path(question)
 
     click_on 'Post Your Answer'

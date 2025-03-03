@@ -33,6 +33,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
+  config.include FeatureHelpers, type: :feature
 
   config.before(:each, type: :controller) do
     Rails.application.reload_routes_unless_loaded

@@ -9,10 +9,7 @@ feature 'User can create question', %q(
   given(:question) { create(:question, author: user) }
 
   scenario 'Authenticated user asks a question' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
+    sign_in(user)
 
     visit questions_path
     click_on 'Ask question'
@@ -27,10 +24,7 @@ feature 'User can create question', %q(
   end
 
   scenario 'Authenticated user ask a question with errors' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Log in'
+    sign_in(user)
 
     visit questions_path
     click_on 'Ask question'
