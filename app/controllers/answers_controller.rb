@@ -1,16 +1,17 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
 
+  def new
+    @answer = @question.answers.new
+  end
+
+  def show; end
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.new(answer_params)
     @answer.author = current_user
-
-    if @answer.save
-      redirect_to @answer, notice: "Answer successfully created"
-    else
-      redirect_to @question, notice: "Body can't be blank"
-    end
+    render :new unless @answer.save
   end
 
   def destroy

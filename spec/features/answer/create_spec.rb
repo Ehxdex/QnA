@@ -15,9 +15,9 @@ feature 'Authenticated user can create answers', %q(
     fill_in 'Your Answer', with: answer.body
     click_on 'Post Your Answer'
 
-    visit question_path(question)
-
     expect(page).to have_content 'Answer successfully created'
+    expect(current_path).to eq question_answers_path(question)
+
     expect(page).to have_content answer.body
   end
 
