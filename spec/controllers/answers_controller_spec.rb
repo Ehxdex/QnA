@@ -36,12 +36,12 @@ RSpec.describe AnswersController, type: :controller do
     let!(:answer) { create(:answer, question: question, author: user) }
 
     it 'deletes the answer' do
-      expect { delete :destroy,  params: { id: answer } }.to change(Answer, :count).by(-1)
+      expect { delete :destroy,  params: { id: answer }, format: :turbo_stream }.to change(Answer, :count).by(-1)
     end
 
-    it 'redirect to current question' do
-      delete :destroy, params: { id: answer }
-      expect(response).to redirect_to question_path(answer.question)
+    it 'render destroy template' do
+      delete :destroy, params: { id: answer, format: :turbo_stream }
+      expect(response).to render_template(:destroy)
     end
   end
 end

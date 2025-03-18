@@ -1,6 +1,8 @@
 = turbo_frame_tag Answer.new do
   - if @question.answers.present?
     - @question.answers.each do |answer|
-      p = answer.body
-      - if answer.author == current_user && user_signed_in?
-        = link_to "Delete", answer_path(answer.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+      = turbo_frame_tag answer do
+        p = answer.body
+        - if answer.author == current_user && user_signed_in?
+          = link_to "Edit", edit_answer_path(answer), class: 'btn btn-primary'
+          = link_to "Delete", answer_path(answer), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }

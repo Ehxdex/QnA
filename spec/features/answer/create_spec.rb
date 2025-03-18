@@ -13,7 +13,7 @@ feature 'Authenticated user can create answers', %q(
     visit question_path(question)
 
     fill_in 'Your Answer', with: answer.body
-    click_on 'Post Your Answer'
+    click_on 'Submit'
 
     expect(page).to have_content 'Answer successfully created'
     expect(current_path).to eq question_answers_path(question)
@@ -25,7 +25,7 @@ feature 'Authenticated user can create answers', %q(
     visit question_path(question)
 
     fill_in 'Your Answer', with: answer.body
-    click_on 'Post Your Answer'
+    click_on 'Submit'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
@@ -34,7 +34,7 @@ feature 'Authenticated user can create answers', %q(
     sign_in(user)
     visit question_path(question)
 
-    click_on 'Post Your Answer'
+    click_on 'Submit'
 
     expect(page).to have_content "Body can't be blank"
   end
