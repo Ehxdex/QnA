@@ -17,17 +17,13 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.author = current_user
-    if @question.save
-      # redirect_to @question, notice: "Your question successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
+    render :new unless @question.save
   end
 
   def destroy
     @question.destroy
 
-    redirect_to questions_path, notice: "The question has been deleted. "
+    flash.now[:success] = "The answer has been deleted"
   end
 
   private

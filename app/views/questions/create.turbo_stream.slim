@@ -1,1 +1,3 @@
+= turbo_stream.remove 'form_error'
 = turbo_stream.replace Question.new, partial: 'questions/question' 
+= turbo_stream.append Question.new, partial: 'questions/ask_button'
