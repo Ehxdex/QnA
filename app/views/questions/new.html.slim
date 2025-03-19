@@ -1,7 +1,1 @@
-= render 'shared/errors', resource: @question
-
-h1 = 'New Question'
-
-= render 'form'
-
-= link_to 'Back', questions_path
+= render 'form', question: @question

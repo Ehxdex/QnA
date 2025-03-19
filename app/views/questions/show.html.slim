@@ -1,5 +1,6 @@
-h1 = @question.title
-p = @question.body
+/ h1 = @question.title
+/ p = @question.body
+= render "questions/question"
 p = 'Question author: ' +  @question.author.email 
 
 - if @question.author == current_user

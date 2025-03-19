@@ -1,0 +1,5 @@
+= turbo_frame_tag Question.new do
+  - if @questions.present?
+    - @questions.each do |question|
+      = turbo_frame_tag question do
+        p = link_to question.title, question_path(question)
