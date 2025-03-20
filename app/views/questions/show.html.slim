@@ -1,10 +1,5 @@
-/ = render 'questions/question'
-/ p = 'Question author: ' +  @question.author.email 
-
-/ - if @question.author == current_user
-/   = link_to "Delete", question_path(@question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
-
-/ hr
+h2= @question.title
+p= @question.body
 
 h3 = 'Answers:'
 = render 'answers/answer'
@@ -12,4 +7,4 @@ h3 = 'Answers:'
 h2 Create New Answer
 = render 'answers/form', answer: @answer
 
-= link_to 'Back', questions_path
+= link_to 'Back to all questions', questions_path
