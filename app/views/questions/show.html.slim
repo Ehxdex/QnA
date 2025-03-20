@@ -1,10 +1,10 @@
-= render "questions/question"
-p = 'Question author: ' +  @question.author.email 
+/ = render 'questions/question'
+/ p = 'Question author: ' +  @question.author.email 
 
-- if @question.author == current_user
-  = link_to "Delete", question_path(@question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+/ - if @question.author == current_user
+/   = link_to "Delete", question_path(@question), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
-hr
+/ hr
 
 h3 = 'Answers:'
 = render 'answers/answer'

@@ -1,3 +1,2 @@
-= turbo_stream.remove 'form_error'
-= turbo_stream.replace Question.new, partial: 'questions/question' 
-= turbo_stream.append Question.new, partial: 'questions/ask_button'
+= turbo_stream.replace Question.new, partial: 'new_question'
+= turbo_stream.after Question.new, render(@question)
