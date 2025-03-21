@@ -44,4 +44,34 @@ RSpec.describe AnswersController, type: :controller do
       expect(response).to render_template(:destroy)
     end
   end
+
+  describe 'PATCH #update' do
+    before { login(user) }
+    let!(:answer) { create(:answer, question: question, author: user) }
+    context 'with valid attributes' do
+      it 'changes answer attributes' do
+        patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :turbo_stream
+        answer.reload
+        expect(answer.body).to eq 'new body'
+      end
+
+      it 'redirect to current question' do
+        patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :turbo_stream
+        expect(response).to redirect_to question_path(answer.question)
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not change answer attributes' do
+        expect do
+          patch :update, params: { id: answer, answer: { body: :invalid } }, format: :turbo_stream
+        end.to_not change(answer, :body)
+      end
+
+      it 'redirect to current question' do
+        patch :update, params: { id: answer, answer: { body: :invalid } }, format: :turbo_stream
+        expect(response).to redirect_to question_path(answer.question)
+      end
+    end
+  end
 end

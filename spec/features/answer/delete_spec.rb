@@ -10,7 +10,7 @@ feature 'Authenticated user can delete his answers', %q(
   given(:answer) { create(:answer, question: question, author: user) }
 
 
-  scenario 'Authenticated user can delete answer', js: true do
+  scenario 'Authenticated user can delete answer' do
     sign_in(user)
     visit question_path(question)
 

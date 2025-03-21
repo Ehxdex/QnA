@@ -50,12 +50,12 @@ RSpec.describe QuestionsController, type: :controller do
     before { login(user) }
     context 'with valid attributes' do
       it 'saves a new question in the database' do
-        expect { post :create, params: { question: attributes_for(:question) } }.to change(Question, :count).by(1)
+        expect { post :create, params: { question: attributes_for(:question), format: :turbo_stream } }.to change(Question, :count).by(1)
       end
 
-      it 'redirects to show view' do
-        post :create, params: { question: attributes_for(:question) }
-        expect(response).to redirect_to assigns(:question)
+      it 'render create template' do
+        post :create, params: { question: attributes_for(:question), format: :turbo_stream }
+        expect(response).to render_template(:create)
       end
     end
 
@@ -76,12 +76,42 @@ RSpec.describe QuestionsController, type: :controller do
     let!(:question) { create(:question, author: user) }
 
     it 'deletes the question' do
-      expect { delete :destroy, params: { id: question } }.to change(Question, :count).by(-1)
+      expect { delete :destroy, params: { id: question }, format: :turbo_stream }.to change(Question, :count).by(-1)
     end
 
-    it 'redirect to index' do
-      delete :destroy, params: { id: question }
-      expect(response).to redirect_to questions_path
+    it 'render destroy template' do
+      delete :destroy, params: { id: question, format: :turbo_stream  }
+      expect(response).to render_template(:destroy)
+    end
+  end
+
+  describe 'PATCH #update' do
+    before { login(user) }
+    let!(:question) { create(:question, author: user) }
+    context 'with valid attributes' do
+      it 'changes question attributes' do
+        patch :update, params: { id: question, question: { body: 'new body' } }, format: :turbo_stream
+        question.reload
+        expect(question.body).to eq 'new body'
+      end
+
+      it 'redirect to current question' do
+        patch :update, params: { id: question, question: { body: 'new body' } }, format: :turbo_stream
+        expect(response).to redirect_to questions_path
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not change question attributes' do
+        expect do
+          patch :update, params: { id: question, question: { body: :invalid } }, format: :turbo_stream
+        end.to_not change(question, :body)
+      end
+
+      it 'redirect to current question' do
+        patch :update, params: { id: question, question: { body: :invalid } }, format: :turbo_stream
+        expect(response).to redirect_to questions_path
+      end
     end
   end
 end
