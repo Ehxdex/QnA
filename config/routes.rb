@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # root "posts#index"
   #
   resources :questions, shallow: true do
-    resources :answers
+    resources :answers do
+      patch :best, on: :member
+    end
   end
 
   root "questions#index"

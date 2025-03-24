@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, only: %i[show edit update destroy]
+  before_action :set_answer, only: %i[show edit update destroy best]
   before_action :set_question, only: %i[new create]
 
   def new
@@ -28,6 +28,11 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     flash.now[:success] = "The answer has been deleted"
+  end
+
+  def best
+    @question = @answer.question
+    @answer.set_best
   end
 
   private
