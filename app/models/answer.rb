@@ -5,6 +5,8 @@ class Answer < ApplicationRecord
   validates :body, presence: true
   validates :best, inclusion: [ true, false ]
 
+  default_scope { order("best DESC") }
+
   def set_best
     self.class.transaction do
       question.answers.update_all(best: false)
