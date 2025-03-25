@@ -3,7 +3,6 @@ class Answer < ApplicationRecord
   belongs_to :question
 
   validates :body, presence: true
-  validates :best, inclusion: [ true, false ]
 
   default_scope { order("best DESC") }
 
