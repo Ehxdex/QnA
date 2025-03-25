@@ -1,11 +1,13 @@
-= form_with model: @question, local: true do |f|
-  div
-    = f.label :title
-    br
-    = f.text_field :title
-  div
-    = f.label :body
-    br
-    = f.text_area :body
-  div
-    = f.submit 'Ask'
+= turbo_frame_tag question do
+  = form_with model: @question, local: true do |f|
+    = render 'shared/errors', resource: @question
+    div
+      = f.label :title
+      br
+      = f.text_field :title
+    div
+      = f.label :body
+      br
+      = f.text_area :body
+    div
+      = f.submit class: 'btn btn-success'

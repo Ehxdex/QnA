@@ -20,12 +20,18 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render 'shared/nav' %>
     
+    <div id="flash">
+      <%= render 'shared/flash' %>
+    </div>
+  
     <%= yield %>
+
+    <%= render 'layouts/footer' %>
   </body>
 </html>

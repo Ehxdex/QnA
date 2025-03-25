@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: %i[ new create destroy ]
-  before_action :set_question, only: %i[ show destroy]
+  before_action :authenticate_user!, only: %i[ new create update destroy ]
+  before_action :set_question, only: %i[ edit update show destroy]
 
   def index
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc)
   end
 
   def new
@@ -14,21 +14,29 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.new
   end
 
+  def edit; end
+
+  def update
+    if @question.update(question_params)
+      redirect_to questions_path
+    else
+      render :edit
+    end
+  end
+
   def create
     @question = Question.new(question_params)
     @question.author = current_user
-
     if @question.save
-      redirect_to @question, notice: "Your question successfully created."
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
   def destroy
     @question.destroy
 
-    redirect_to questions_path, notice: "The question has been deleted. "
+    flash.now[:success] = "The question has been deleted"
   end
 
   private
