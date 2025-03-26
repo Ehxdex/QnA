@@ -8,30 +8,40 @@ feature 'User can create question', %q(
   given(:user) { create(:user) }
   given(:question) { create(:question, author: user) }
 
-  scenario 'Authenticated user asks a question' do
-    sign_in(user)
+  describe 'Authenticated user' do
+    background do
+      sign_in(user)
 
-    visit questions_path
-    click_on 'New question'
+      visit questions_path
+      click_on 'New question'
+    end
 
-    fill_in 'Title', with: question.title
-    fill_in 'Body', with: question.body
-    click_on 'Create Question'
+    scenario 'asks a question' do
+      fill_in 'Title', with: question.title
+      fill_in 'Body', with: question.body
+      click_on 'Create Question'
 
-    expect(page).to have_content "Your question successfully created."
-    expect(page).to have_content question.title
-    expect(page).to have_content question.body
-  end
+      expect(page).to have_content "Your question successfully created."
+      expect(page).to have_content question.title
+      expect(page).to have_content question.body
+    end
 
-  scenario 'Authenticated user ask a question with errors' do
-    sign_in(user)
+    scenario 'asks a question with errors' do
+      click_on 'Create Question'
 
-    visit questions_path
-    click_on 'New question'
-    click_on 'Create Question'
+      expect(page).to have_content "Title can't be blank"
+      expect(page).to have_content "Body can't be blank"
+    end
 
-    expect(page).to have_content "Title can't be blank"
-    expect(page).to have_content "Body can't be blank"
+    scenario 'asks a question with attached file' do
+      fill_in 'Title', with: question.title
+      fill_in 'Body', with: question.body
+      attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
+
+      click_on 'Create Question'
+
+      expect(page).to have_content "rails_helper.rb"
+    end
   end
 
   scenario 'Unauthenticated user tries to ask a question' do

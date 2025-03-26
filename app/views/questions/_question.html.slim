@@ -3,6 +3,11 @@
     h2
       = link_to question.title, question_path(question), data: { turbo_frame: '_top' }
     p= question.body
+    
     - if question.author == current_user && user_signed_in?
+
+      - if question.file.attached?
+        p= link_to question.file.filename.to_s, url_for(question.file)
+
       = link_to "Edit", edit_question_path(question), class: 'btn btn-primary'
       = link_to "Delete", question_path(question), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
