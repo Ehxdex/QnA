@@ -1,4 +1,5 @@
 = turbo_frame_tag answer do
+  = render 'answers/files', answer: @answer
   = form_with model: [@question, @answer], local: true do |f|
     = turbo_frame_tag 'form_error' do
       = render 'shared/errors', resource: @answer
@@ -7,6 +8,8 @@
       br
       = f.text_area :body
     div
+      - @answer.files.each do |file|
+        = f.hidden_field :files, multiple: true, value: file.signed_id
       = f.label :files
       br
       = f.file_field :files, multiple: true
