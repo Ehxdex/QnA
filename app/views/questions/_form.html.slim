@@ -10,8 +10,8 @@
       br
       = f.text_area :body
     div
-      = f.label :file
+      = f.label :files
       br
-      = f.file_field :file
+      = f.file_field :files, multiple: true
     div
       = f.submit class: 'btn btn-success'
