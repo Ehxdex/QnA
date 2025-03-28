@@ -1,0 +1,6 @@
+= turbo_frame_tag 'attachment_list' do
+  - if attachment.files.attached?
+    - attachment.files.each do |file|
+      p
+        = link_to file.filename.to_s, url_for(file)
+        = link_to "X", attachment_path(file), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
