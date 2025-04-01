@@ -12,7 +12,7 @@
       = f.text_area :body
     div
       - @question.files.each do |file|
-        = f.hidden_field :files, multiple: true, value: file.signed_id
+        = f.hidden_field :files, multiple: true, value: file.signed_id, direct_upload: true
       = f.label :files
       br
       = f.file_field :files, multiple: true
