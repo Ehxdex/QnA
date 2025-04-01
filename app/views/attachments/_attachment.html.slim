@@ -1,4 +1,4 @@
-= turbo_frame_tag 'attachment_list' do
+= turbo_frame_tag attachment do
   - if attachment.files.attached?
     - attachment.files.each do |file|
       p

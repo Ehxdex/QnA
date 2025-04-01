@@ -1,5 +1,5 @@
 = turbo_frame_tag answer do
-  = render 'answers/files', answer: @answer
+  = render 'attachments/attachment', attachment: @answer
   = form_with model: [@question, @answer], local: true do |f|
     = turbo_frame_tag 'form_error' do
       = render 'shared/errors', resource: @answer

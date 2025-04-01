@@ -5,7 +5,5 @@ class AttachmentsController < ApplicationController
     @attachment = ActiveStorage::Attachment.find(params[:id])
     @attachment.purge
     flash.now[:notice] = "File successfully deleted"
-
-    redirect_to questions_path
   end
 end
