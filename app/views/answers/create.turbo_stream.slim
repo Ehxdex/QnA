@@ -1,2 +1,2 @@
 = turbo_stream.remove 'form_error'
-= turbo_stream.replace Answer.new, partial: 'answers/answer'
+= turbo_stream.replace(Answer.new, partial: 'answers/answer', locals: { answer: @answer })

@@ -2,3 +2,6 @@
 = prepend_flash
 - if @question
   = turbo_stream.replace(@question, partial: "questions/question", locals: { question: @question })
+
+- if @answer
+  = turbo_stream.replace(@answer, partial: "answers/answer", locals: { answer: @answer })
