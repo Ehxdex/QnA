@@ -5,6 +5,7 @@ RSpec.describe Answer, type: :model do
 
   it { should validate_presence_of :body }
   it { should have_db_column(:best).of_type(:boolean) }
+  it { should have_many_attached :files }
 
   let(:user) { create(:user) }
   let(:question) { create(:question, author: user) }
@@ -18,7 +19,7 @@ RSpec.describe Answer, type: :model do
       expect(answer.best).to be_truthy
     end
 
-    it 'to false false' do
+    it 'to false' do
       answers[1].set_best
 
       expect(answers[0].best).to be_falsy

@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "cssbundling-rails", "~> 1.4"
+
+gem "aws-sdk-s3", require: false
