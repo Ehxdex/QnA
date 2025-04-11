@@ -1,5 +1,11 @@
 = render 'questions/question', question: @question
 
+.links
+  p Links:
+  ul
+    - @question.links.each do |link|
+      li= link_to link.name, link.url
+
 h3 = 'Answers:'
 = turbo_frame_tag Answer.new do
   - if @question.answers.present?
