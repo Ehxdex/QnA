@@ -1,0 +1,16 @@
+/ p Links:
+/ p 
+/   = f.fields_for :links do |l|
+/     p 
+/       = l.label :name, 'Link name'
+/       = l.text_field :name
+/     p
+/       = l.label :url
+/       = l.text_field :url
+div.nested-form-wrapper[data-new-record="<%= f.object.new_record? %"]
+  p 
+    = f.label :name, 'Link name'
+    = f.text_field :name
+  p
+    = f.label :url
+    = f.text_field :url

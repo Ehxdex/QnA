@@ -1,6 +1,6 @@
 = turbo_frame_tag question do
   = render 'attachments/attachment', attachment: @question
-  = form_with model: @question, local: true do |f|
+  = form_with model: @question, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }, local: true do |f|
     = render 'shared/errors', resource: @question
     div
       = f.label :title
@@ -16,14 +16,16 @@
       = f.label :files
       br
       = f.file_field :files, multiple: true
-    p Links:
-    p 
-      = f.fields_for :links do |l|
-        p 
-          = l.label :name, 'Link name'
-          = l.text_field :name
-        p
-          = l.label :url
-          = l.text_field :url
+
+    template[data-nested-form-target='template']
+      = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+        = render 'shared/link_fields', f: l
+      
+    = f.fields_for :links do |l|
+      = render 'shared/link_fields', f: l
+    
+    div[data-nested-form-target="target"]
+      button.btn[data-action="nested-form#add"] Add link
+ 
     div
       = f.submit class: 'btn btn-success'
