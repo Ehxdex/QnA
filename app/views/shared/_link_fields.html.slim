@@ -1,0 +1,8 @@
+div.nested-form-wrapper[data-new-record="<%= f.object.new_record? %>"]
+  p Links:
+  p 
+    = f.label :name, 'Link name'
+    = f.text_field :name
+  p
+    = f.label :url
+    = f.text_field :url
