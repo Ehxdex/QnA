@@ -17,15 +17,17 @@
       br
       = f.file_field :files, multiple: true
 
+    h2 Links:
+
     template[data-nested-form-target='template']
       = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
         = render 'shared/link_fields', f: l
-      
+    
     = f.fields_for :links do |l|
       = render 'shared/link_fields', f: l
     
     div[data-nested-form-target="target"]
-      button.btn[data-action="nested-form#add"] Add link
+      button.btn.btn-info[data-action="nested-form#add"] Add link
  
     div
       = f.submit class: 'btn btn-success'

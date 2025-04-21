@@ -8,6 +8,8 @@
       br
       = f.text_area :body
       
+    h2 Links:
+
     template[data-nested-form-target='template']
       = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
         = render 'shared/link_fields', f: l
@@ -16,7 +18,7 @@
       = render 'shared/link_fields', f: l
     
     div[data-nested-form-target="target"]
-      button.btn[data-action="nested-form#add"] Add link
+      button.btn.btn-info[data-action="nested-form#add"] Add link
 
     div
       - @answer.files.each do |file|
