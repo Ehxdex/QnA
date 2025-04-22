@@ -22,7 +22,7 @@ module Qna
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("services")
 
     config.generators do |g|
       g.test_framework :rspec,
