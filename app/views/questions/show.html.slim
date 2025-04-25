@@ -8,6 +8,13 @@
       - if link.is_gist?
         = render 'shared/gist', link: link
 
+  'Reward:
+  - if @question.reward.present?
+    div
+      = image_tag(url_for(@question.reward.image), size: "100x100", alt: @question.reward.name)
+      br
+      = @question.reward.name
+
 .answers
   h3 = 'Answers:'
   = turbo_frame_tag Answer.new do
