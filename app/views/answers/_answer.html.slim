@@ -2,11 +2,7 @@
   hr
   p = answer.body
 
-  .links 
-    p Links:
-    ul 
-      - answer.links.each do |link|
-        li= link_to link.name, link.url
+  = render 'shared/links', object: answer
   
   - if answer.author == current_user && user_signed_in?
     = render 'attachments/attachment', attachment: answer

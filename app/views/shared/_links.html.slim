@@ -1,0 +1,7 @@
+- if object.links.present?
+  p Links:
+  ul 
+    - object.links.each do |link|
+      li= link_to link.name, link.url
+      - if link.is_gist?
+        = render 'shared/gist', link: link

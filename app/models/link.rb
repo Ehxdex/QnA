@@ -7,6 +7,6 @@ class Link < ApplicationRecord
   validates :url, format: { with: URL_REGEXP, message: "is invalid (format must be 'http(https)://google.com')" }
 
   def is_gist?
-    url.include?("gist.github.com")
+    url&.include?("gist.github.com")
   end
 end
