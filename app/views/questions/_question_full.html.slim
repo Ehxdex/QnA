@@ -10,7 +10,7 @@
       - if link.is_gist?
         = render 'shared/gist', link: link
 
-  - if question.reward.image.present?
+  - if question.reward.present?
     h4= "Reward:"
     div
       h6= question.reward.name
