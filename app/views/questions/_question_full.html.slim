@@ -1,0 +1,24 @@
+= turbo_frame_tag question do
+  section class='mb-4'
+    h2= question.title
+    p= question.body
+  
+  h4 Links:
+  ul
+    - question.links.each do |link|
+      li= link_to link.name, link.url
+      - if link.is_gist?
+        = render 'shared/gist', link: link
+
+  - if question.reward.image.present?
+    h4= "Reward:"
+    div
+      h6= question.reward.name
+      br
+      = image_tag(url_for(question.reward.image), size: "100x100", alt: question.reward.name)
+      
+
+  - if question.author == current_user && user_signed_in?
+    = render 'attachments/attachment', attachment: question
+    = link_to "Edit", edit_question_path(question), class: 'btn btn-primary'
+    = link_to "Delete", question_path(question), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
