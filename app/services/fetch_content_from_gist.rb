@@ -1,4 +1,4 @@
-class GistService
+class FetchContentFromGist
   def initialize(link, client = default_client)
     @link = link
     @client = client

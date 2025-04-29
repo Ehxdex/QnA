@@ -16,7 +16,7 @@ class Answer < ApplicationRecord
       question.answers.update_all(best: false)
       update(best: true)
 
-      question.set_reward(author)
+      question.reward&.update(user: author)
     end
   end
 end
