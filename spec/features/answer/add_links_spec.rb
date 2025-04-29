@@ -6,7 +6,7 @@ feature 'User can add links to answer', %q(
   I'd like to be able to add links
 ) do
   given(:user) { create(:user) }
-  given(:gist_url) { 'https://gist.github.com/Ehxdex' }
+  given(:url) { 'https://google.com' }
   given(:question) { create(:question, author: user) }
   given(:answer) { create(:answer, question: question, author: user) }
 
@@ -16,11 +16,13 @@ feature 'User can add links to answer', %q(
 
     fill_in 'Your Answer', with: answer.body
 
-    fill_in 'Link name', with: 'My gist'
-    fill_in 'Url', with: gist_url
+    fill_in 'Link name', with: 'Google'
+    fill_in 'Url', with: url
 
     click_on 'Submit'
+    visit question_path(question)
 
-    expect(page).to have_link 'My gist', href: gist_url
+
+    expect(page).to have_link 'Google', href: url
   end
 end

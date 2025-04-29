@@ -105,7 +105,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 'redirect to current question' do
         patch :update, params: { id: question, question: { body: 'new body' } }, format: :turbo_stream
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 'redirect to current question' do
         patch :update, params: { id: question, question: { body: :invalid } }, format: :turbo_stream
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
       end
     end
   end

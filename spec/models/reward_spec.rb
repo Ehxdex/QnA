@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Reward, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:user).optional }
+  it { should belong_to :question }
+
+  it { should have_one_attached :image }
+
+  it { should validate_presence_of :name }
 end
