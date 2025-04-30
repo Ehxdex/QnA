@@ -15,4 +15,8 @@ module ApplicationHelper
       "alert-warning"
     end
   end
+
+  def gist_content(link)
+    FetchContentFromGist.new(link).content
+  end
 end

@@ -1,10 +1,18 @@
 = turbo_frame_tag question do
   section class='mb-4'
-    h2
-      = link_to question.title, question_path(question), data: { turbo_frame: '_top' }
+    h2= question.title
     p= question.body
+  
+  = render 'shared/links', object: question
 
-    - if question.author == current_user && user_signed_in?
-      = render 'attachments/attachment', attachment: question
-      = link_to "Edit", edit_question_path(question), class: 'btn btn-primary'
-      = link_to "Delete", question_path(question), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
+  - if question.reward.present?
+    h4= "Reward:"
+    div
+      h6= question.reward.name
+      br
+      = image_tag(url_for(question.reward.image), size: "100x100", alt: question.reward.name)
+
+  - if question.author == current_user && user_signed_in?
+    = render 'attachments/attachment', attachment: question
+    = link_to "Edit", edit_question_path(question), class: 'btn btn-primary'
+    = link_to "Delete", question_path(question), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }

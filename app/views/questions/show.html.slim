@@ -1,9 +1,10 @@
 = render 'questions/question', question: @question
 
-h3 = 'Answers:'
-= turbo_frame_tag Answer.new do
-  - if @question.answers.present?
-    = render @question.answers
+.answers
+  h3 = 'Answers:'
+  = turbo_frame_tag Answer.new do
+    - if @question.answers.present?
+      = render @question.answers
 
 h2 Create New Answer
 = render 'answers/form', answer: @answer

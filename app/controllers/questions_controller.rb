@@ -8,17 +8,20 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.links.new
+    @question.build_reward
   end
 
   def show
     @answer = @question.answers.new
+    @answer.links.new
   end
 
   def edit; end
 
   def update
     if @question.update(question_params)
-      redirect_to questions_path
+      redirect_to question_path(@question)
     else
       render :edit
     end
@@ -42,7 +45,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body, files: [], links_attributes: [ :id, :name, :_destroy, :url ], reward_attributes: [ :name, :image ])
   end
 
   def set_question

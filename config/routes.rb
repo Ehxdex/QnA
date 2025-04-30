@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   root "questions#index"
 
   resources :attachments, only: :destroy
+  resources :users, only: :show
 end

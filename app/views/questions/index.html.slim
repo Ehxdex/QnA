@@ -2,4 +2,9 @@ h1 Questions
 
 = render "new_question"
 
-= render @questions
+- @questions.each do |question|
+  = turbo_frame_tag question do
+    section class='mb-4'
+      h2
+        = link_to question.title, question_path(question), data: { turbo_frame: '_top' }
+      p= question.body

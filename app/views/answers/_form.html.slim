@@ -1,12 +1,25 @@
 = turbo_frame_tag answer do
   = render 'attachments/attachment', attachment: @answer
-  = form_with model: [@question, @answer], local: true do |f|
+  = form_with model: [@question, @answer], data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }, local: true do |f|
     = turbo_frame_tag 'form_error' do
       = render 'shared/errors', resource: @answer
     div
       = f.label :body, 'Your Answer'
       br
       = f.text_area :body
+      
+    h2 Links:
+
+    template[data-nested-form-target='template']
+      = f.fields_for :links, Link.new, child_index: "NEW_RECORD" do |l|
+        = render 'shared/link_fields', f: l
+      
+    = f.fields_for :links do |l|
+      = render 'shared/link_fields', f: l
+    
+    div[data-nested-form-target="target"]
+      button.btn.btn-info[data-action="nested-form#add"] Add link
+
     div
       - @answer.files.each do |file|
         = f.hidden_field :files, multiple: true, value: file.signed_id, direct_upload: true

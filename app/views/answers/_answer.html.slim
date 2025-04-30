@@ -1,6 +1,8 @@
 = turbo_frame_tag answer do
   hr
   p = answer.body
+
+  = render 'shared/links', object: answer
   
   - if answer.author == current_user && user_signed_in?
     = render 'attachments/attachment', attachment: answer

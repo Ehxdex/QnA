@@ -1,0 +1,10 @@
+h1= current_user.email 
+
+h3
+  = 'Rewards:'
+- current_user.rewards.each do |r|
+  p= r.name
+  p= image_tag(url_for(r.image), size: "100x100", alt: r.name)
+
+  h3= 'Best answer for question:'
+  p= r.question.title

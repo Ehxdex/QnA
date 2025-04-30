@@ -28,6 +28,10 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:answer)).to be_a_new(Answer)
     end
 
+    it 'assigns new link for answer' do
+      expect(assigns(:answer).links.first).to be_a_new(Link)
+    end
+
     it 'renders show view' do
       expect(response).to render_template :show
     end
@@ -39,6 +43,10 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'assings a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
+    end
+
+    it 'assings a new Question to @question' do
+      expect(assigns(:question).links.first).to be_a_new(Link)
     end
 
     it 'renders new view' do
@@ -97,7 +105,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 'redirect to current question' do
         patch :update, params: { id: question, question: { body: 'new body' } }, format: :turbo_stream
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
       end
     end
 
@@ -110,7 +118,7 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 'redirect to current question' do
         patch :update, params: { id: question, question: { body: :invalid } }, format: :turbo_stream
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
       end
     end
   end
