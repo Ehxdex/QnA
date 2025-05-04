@@ -12,9 +12,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  #
-  resources :questions, shallow: true do
-    resources :answers do
+
+  concern :votable do
+    post :vote_up, :vote_down, on: :member
+  end
+
+  resources :questions, shallow: true, concerns: :votable do
+    resources :answers, concerns: :votable do
       patch :best, on: :member
     end
   end
