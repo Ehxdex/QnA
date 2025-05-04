@@ -3,6 +3,7 @@
     h2= question.title
     p= question.body
   
+  = render 'shared/votes', object: question
   = render 'shared/links', object: question
 
   - if question.reward.present?
