@@ -2,7 +2,7 @@
   hr
   p = answer.body
   
-  = render 'shared/votes', object: question
+  = render 'shared/votes', object: answer
   = render 'shared/links', object: answer
   
   - if answer.author == current_user && user_signed_in?

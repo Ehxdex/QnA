@@ -5,8 +5,10 @@ class Vote < ApplicationRecord
   validates :value, presence: true
 
   def set_vote_up
+    update(value: 1)
   end
 
   def set_vote_down
+    update(value: -1)
   end
 end
