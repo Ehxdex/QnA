@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  include Voted
+
   before_action :authenticate_user!, only: %i[ new create update destroy ]
   before_action :set_question, only: %i[ edit update show destroy]
 
